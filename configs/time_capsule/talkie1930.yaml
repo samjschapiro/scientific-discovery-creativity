@@ -1,0 +1,10 @@
+output_dir: "data/time_capsule/sample_talkie1930"
+
+# Population: Haven's 100 Greatest Science Discoveries (src/time_capsule/haven100.json).
+# Sample: discoveries with year > T_M, i.e. outside the model's knowledge cutoff.
+model: "talkie-1930"   # T_M = 1930; matched-compute control = talkie-web-13b-base
+
+# Optional ceiling on (discovery_year - T_M). Null = keep every post-cutoff discovery.
+# The context doc warns a too-large gap leaves the model unable to even parse the question,
+# so a failure there is uninformative. Left null here to see the full eligible set first.
+max_gap: null

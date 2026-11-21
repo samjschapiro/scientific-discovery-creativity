@@ -1,0 +1,1022 @@
+{
+ "source": {
+  "work": "Kendall Haven, 100 Greatest Science Discoveries of All Time",
+  "publisher": "Libraries Unlimited / Greenwood, 2007",
+  "isbn": "9781591582656",
+  "text": "https://archive.org/details/100GreatestScienceDiscoveriesOfAllTimeKendallHaven",
+  "extracted": "2026-07-12",
+  "method": "Parsed the archive.org OCR full text. Titles from the table of contents (100); years from the per-chapter 'Year(s) of Discovery' headers (100). Zipped in document order and verified: 84/100 chapters have their title adjacent to their own marker, 0 misalignments, and years are monotonically non-decreasing (the book is chronological).",
+  "caveats": [
+   "3 chapters use a plural 'Years of Discovery: X and Y' header (multi_year=true); year_first is used for filtering.",
+   "2 OCR title errors corrected (see ocr_corrected_from).",
+   "Levers and Buoyancy is 260 B.C.E., encoded as year_first = -260."
+  ]
+ },
+ "discoveries": [
+  {
+   "rank": 1,
+   "title": "Levers and Buoyancy",
+   "years": [
+    -260
+   ],
+   "year_first": -260,
+   "year_last": -260,
+   "multi_year": false
+  },
+  {
+   "rank": 2,
+   "title": "The Sun Is the Center of the Universe",
+   "years": [
+    1520
+   ],
+   "year_first": 1520,
+   "year_last": 1520,
+   "multi_year": false
+  },
+  {
+   "rank": 3,
+   "title": "Human Anatomy",
+   "years": [
+    1543
+   ],
+   "year_first": 1543,
+   "year_last": 1543,
+   "multi_year": false
+  },
+  {
+   "rank": 4,
+   "title": "The Law of Falling Objects",
+   "years": [
+    1598
+   ],
+   "year_first": 1598,
+   "year_last": 1598,
+   "multi_year": false
+  },
+  {
+   "rank": 5,
+   "title": "Planetary Motion",
+   "years": [
+    1609
+   ],
+   "year_first": 1609,
+   "year_last": 1609,
+   "multi_year": false
+  },
+  {
+   "rank": 6,
+   "title": "Jupiter's Moons",
+   "years": [
+    1610
+   ],
+   "year_first": 1610,
+   "year_last": 1610,
+   "multi_year": false
+  },
+  {
+   "rank": 7,
+   "title": "Human Circulatory System",
+   "years": [
+    1628
+   ],
+   "year_first": 1628,
+   "year_last": 1628,
+   "multi_year": false
+  },
+  {
+   "rank": 8,
+   "title": "Air Pressure",
+   "years": [
+    1640
+   ],
+   "year_first": 1640,
+   "year_last": 1640,
+   "multi_year": false
+  },
+  {
+   "rank": 9,
+   "title": "Boyle's Law",
+   "years": [
+    1650
+   ],
+   "year_first": 1650,
+   "year_last": 1650,
+   "multi_year": false
+  },
+  {
+   "rank": 10,
+   "title": "The Existence of Cells",
+   "years": [
+    1665
+   ],
+   "year_first": 1665,
+   "year_last": 1665,
+   "multi_year": false
+  },
+  {
+   "rank": 11,
+   "title": "Universal Gravitation",
+   "years": [
+    1666
+   ],
+   "year_first": 1666,
+   "year_last": 1666,
+   "multi_year": false
+  },
+  {
+   "rank": 12,
+   "title": "Fossils",
+   "years": [
+    1669
+   ],
+   "year_first": 1669,
+   "year_last": 1669,
+   "multi_year": false
+  },
+  {
+   "rank": 13,
+   "title": "Distance to the Sun",
+   "years": [
+    1672
+   ],
+   "year_first": 1672,
+   "year_last": 1672,
+   "multi_year": false
+  },
+  {
+   "rank": 14,
+   "title": "Bacteria",
+   "years": [
+    1680
+   ],
+   "year_first": 1680,
+   "year_last": 1680,
+   "multi_year": false
+  },
+  {
+   "rank": 15,
+   "title": "Laws of Motion",
+   "years": [
+    1687
+   ],
+   "year_first": 1687,
+   "year_last": 1687,
+   "multi_year": false
+  },
+  {
+   "rank": 16,
+   "title": "Order in Nature",
+   "years": [
+    1735
+   ],
+   "year_first": 1735,
+   "year_last": 1735,
+   "multi_year": false
+  },
+  {
+   "rank": 17,
+   "title": "Galaxies",
+   "years": [
+    1750
+   ],
+   "year_first": 1750,
+   "year_last": 1750,
+   "multi_year": false
+  },
+  {
+   "rank": 18,
+   "title": "The Nature of Electricity",
+   "years": [
+    1752
+   ],
+   "year_first": 1752,
+   "year_last": 1752,
+   "multi_year": false
+  },
+  {
+   "rank": 19,
+   "title": "Oceans Control Global Weather",
+   "years": [
+    1770
+   ],
+   "year_first": 1770,
+   "year_last": 1770,
+   "multi_year": false
+  },
+  {
+   "rank": 20,
+   "title": "Oxygen",
+   "years": [
+    1774
+   ],
+   "year_first": 1774,
+   "year_last": 1774,
+   "multi_year": false
+  },
+  {
+   "rank": 21,
+   "title": "Photosynthesis",
+   "years": [
+    1779
+   ],
+   "year_first": 1779,
+   "year_last": 1779,
+   "multi_year": false
+  },
+  {
+   "rank": 22,
+   "title": "Conservation of Matter",
+   "years": [
+    1789
+   ],
+   "year_first": 1789,
+   "year_last": 1789,
+   "multi_year": false
+  },
+  {
+   "rank": 23,
+   "title": "The Nature of Heat",
+   "years": [
+    1790
+   ],
+   "year_first": 1790,
+   "year_last": 1790,
+   "multi_year": false
+  },
+  {
+   "rank": 24,
+   "title": "Erosion of the Earth",
+   "years": [
+    1792
+   ],
+   "year_first": 1792,
+   "year_last": 1792,
+   "multi_year": false
+  },
+  {
+   "rank": 25,
+   "title": "Vaccinations",
+   "years": [
+    1798
+   ],
+   "year_first": 1798,
+   "year_last": 1798,
+   "multi_year": false
+  },
+  {
+   "rank": 26,
+   "title": "Infrared and Ultraviolet",
+   "years": [
+    1800,
+    1801
+   ],
+   "year_first": 1800,
+   "year_last": 1801,
+   "multi_year": true
+  },
+  {
+   "rank": 27,
+   "title": "Anesthesia",
+   "years": [
+    1801
+   ],
+   "year_first": 1801,
+   "year_last": 1801,
+   "multi_year": false
+  },
+  {
+   "rank": 28,
+   "title": "Atoms",
+   "years": [
+    1802
+   ],
+   "year_first": 1802,
+   "year_last": 1802,
+   "multi_year": false
+  },
+  {
+   "rank": 29,
+   "title": "Electrochemical Bonding",
+   "years": [
+    1806
+   ],
+   "year_first": 1806,
+   "year_last": 1806,
+   "multi_year": false
+  },
+  {
+   "rank": 30,
+   "title": "The Existence of Molecules",
+   "years": [
+    1811
+   ],
+   "year_first": 1811,
+   "year_last": 1811,
+   "multi_year": false
+  },
+  {
+   "rank": 31,
+   "title": "Electromagnetism",
+   "years": [
+    1820
+   ],
+   "year_first": 1820,
+   "year_last": 1820,
+   "multi_year": false
+  },
+  {
+   "rank": 32,
+   "title": "First Dinosaur Fossil",
+   "years": [
+    1824
+   ],
+   "year_first": 1824,
+   "year_last": 1824,
+   "multi_year": false
+  },
+  {
+   "rank": 33,
+   "title": "Ice Ages",
+   "years": [
+    1837
+   ],
+   "year_first": 1837,
+   "year_last": 1837,
+   "multi_year": false
+  },
+  {
+   "rank": 34,
+   "title": "Calories (Units of Energy)",
+   "years": [
+    1843
+   ],
+   "year_first": 1843,
+   "year_last": 1843,
+   "multi_year": false
+  },
+  {
+   "rank": 35,
+   "title": "Conservation of Energy",
+   "years": [
+    1847
+   ],
+   "year_first": 1847,
+   "year_last": 1847,
+   "multi_year": false
+  },
+  {
+   "rank": 36,
+   "title": "Doppler Effect",
+   "years": [
+    1848
+   ],
+   "year_first": 1848,
+   "year_last": 1848,
+   "multi_year": false
+  },
+  {
+   "rank": 37,
+   "title": "Germ Theory",
+   "years": [
+    1856
+   ],
+   "year_first": 1856,
+   "year_last": 1856,
+   "multi_year": false
+  },
+  {
+   "rank": 38,
+   "title": "The Theory of Evolution",
+   "years": [
+    1858
+   ],
+   "year_first": 1858,
+   "year_last": 1858,
+   "multi_year": false
+  },
+  {
+   "rank": 39,
+   "title": "Atomic Light Signatures",
+   "years": [
+    1859
+   ],
+   "year_first": 1859,
+   "year_last": 1859,
+   "multi_year": false
+  },
+  {
+   "rank": 40,
+   "title": "Electromagnetic Radiation/Radio Waves",
+   "years": [
+    1864
+   ],
+   "year_first": 1864,
+   "year_last": 1864,
+   "multi_year": false
+  },
+  {
+   "rank": 41,
+   "title": "Heredity",
+   "years": [
+    1865
+   ],
+   "year_first": 1865,
+   "year_last": 1865,
+   "multi_year": false
+  },
+  {
+   "rank": 42,
+   "title": "Deep-Sea Life",
+   "years": [
+    1870
+   ],
+   "year_first": 1870,
+   "year_last": 1870,
+   "multi_year": false
+  },
+  {
+   "rank": 43,
+   "title": "Periodic Chart of Elements",
+   "years": [
+    1880
+   ],
+   "year_first": 1880,
+   "year_last": 1880,
+   "multi_year": false
+  },
+  {
+   "rank": 44,
+   "title": "Cell Division",
+   "years": [
+    1882
+   ],
+   "year_first": 1882,
+   "year_last": 1882,
+   "multi_year": false
+  },
+  {
+   "rank": 45,
+   "title": "X-Rays",
+   "years": [
+    1895
+   ],
+   "year_first": 1895,
+   "year_last": 1895,
+   "multi_year": false
+  },
+  {
+   "rank": 46,
+   "title": "Blood Types",
+   "years": [
+    1897
+   ],
+   "year_first": 1897,
+   "year_last": 1897,
+   "multi_year": false
+  },
+  {
+   "rank": 47,
+   "title": "Electron",
+   "years": [
+    1897
+   ],
+   "year_first": 1897,
+   "year_last": 1897,
+   "multi_year": false
+  },
+  {
+   "rank": 48,
+   "title": "Virus",
+   "years": [
+    1898
+   ],
+   "year_first": 1898,
+   "year_last": 1898,
+   "multi_year": false
+  },
+  {
+   "rank": 49,
+   "title": "Mitochondria",
+   "years": [
+    1898
+   ],
+   "year_first": 1898,
+   "year_last": 1898,
+   "multi_year": false
+  },
+  {
+   "rank": 50,
+   "title": "Radioactivity",
+   "years": [
+    1901
+   ],
+   "year_first": 1901,
+   "year_last": 1901,
+   "multi_year": false
+  },
+  {
+   "rank": 51,
+   "title": "Atmospheric Layers",
+   "years": [
+    1902
+   ],
+   "year_first": 1902,
+   "year_last": 1902,
+   "multi_year": false
+  },
+  {
+   "rank": 52,
+   "title": "Hormones",
+   "years": [
+    1902
+   ],
+   "year_first": 1902,
+   "year_last": 1902,
+   "multi_year": false
+  },
+  {
+   "rank": 53,
+   "title": "E = mc2",
+   "years": [
+    1905
+   ],
+   "year_first": 1905,
+   "year_last": 1905,
+   "multi_year": false,
+   "ocr_corrected_from": "E = me2"
+  },
+  {
+   "rank": 54,
+   "title": "Relativity",
+   "years": [
+    1905
+   ],
+   "year_first": 1905,
+   "year_last": 1905,
+   "multi_year": false
+  },
+  {
+   "rank": 55,
+   "title": "Vitamins",
+   "years": [
+    1906
+   ],
+   "year_first": 1906,
+   "year_last": 1906,
+   "multi_year": false
+  },
+  {
+   "rank": 56,
+   "title": "Radioactive Dating",
+   "years": [
+    1907
+   ],
+   "year_first": 1907,
+   "year_last": 1907,
+   "multi_year": false
+  },
+  {
+   "rank": 57,
+   "title": "Function of Chromosomes",
+   "years": [
+    1909
+   ],
+   "year_first": 1909,
+   "year_last": 1909,
+   "multi_year": false
+  },
+  {
+   "rank": 58,
+   "title": "Antibiotics",
+   "years": [
+    1910
+   ],
+   "year_first": 1910,
+   "year_last": 1910,
+   "multi_year": false
+  },
+  {
+   "rank": 59,
+   "title": "Fault Lines",
+   "years": [
+    1911
+   ],
+   "year_first": 1911,
+   "year_last": 1911,
+   "multi_year": false
+  },
+  {
+   "rank": 60,
+   "title": "Superconductivity",
+   "years": [
+    1911
+   ],
+   "year_first": 1911,
+   "year_last": 1911,
+   "multi_year": false
+  },
+  {
+   "rank": 61,
+   "title": "Atomic Bonding",
+   "years": [
+    1913
+   ],
+   "year_first": 1913,
+   "year_last": 1913,
+   "multi_year": false
+  },
+  {
+   "rank": 62,
+   "title": "Isotopes",
+   "years": [
+    1913
+   ],
+   "year_first": 1913,
+   "year_last": 1913,
+   "multi_year": false
+  },
+  {
+   "rank": 63,
+   "title": "Earth's Core and Mantle",
+   "years": [
+    1914
+   ],
+   "year_first": 1914,
+   "year_last": 1914,
+   "multi_year": false
+  },
+  {
+   "rank": 64,
+   "title": "Continental Drift",
+   "years": [
+    1915
+   ],
+   "year_first": 1915,
+   "year_last": 1915,
+   "multi_year": false
+  },
+  {
+   "rank": 65,
+   "title": "Black Holes",
+   "years": [
+    1916
+   ],
+   "year_first": 1916,
+   "year_last": 1916,
+   "multi_year": false
+  },
+  {
+   "rank": 66,
+   "title": "Insulin",
+   "years": [
+    1921
+   ],
+   "year_first": 1921,
+   "year_last": 1921,
+   "multi_year": false
+  },
+  {
+   "rank": 67,
+   "title": "Neurotransmitters",
+   "years": [
+    1921
+   ],
+   "year_first": 1921,
+   "year_last": 1921,
+   "multi_year": false
+  },
+  {
+   "rank": 68,
+   "title": "Human Evolution",
+   "years": [
+    1924
+   ],
+   "year_first": 1924,
+   "year_last": 1924,
+   "multi_year": false
+  },
+  {
+   "rank": 69,
+   "title": "Quantum Theory",
+   "years": [
+    1925
+   ],
+   "year_first": 1925,
+   "year_last": 1925,
+   "multi_year": false
+  },
+  {
+   "rank": 70,
+   "title": "Expanding Universe",
+   "years": [
+    1926
+   ],
+   "year_first": 1926,
+   "year_last": 1926,
+   "multi_year": false
+  },
+  {
+   "rank": 71,
+   "title": "Uncertainty Principle",
+   "years": [
+    1927
+   ],
+   "year_first": 1927,
+   "year_last": 1927,
+   "multi_year": false
+  },
+  {
+   "rank": 72,
+   "title": "Speed of Light",
+   "years": [
+    1928
+   ],
+   "year_first": 1928,
+   "year_last": 1928,
+   "multi_year": false
+  },
+  {
+   "rank": 73,
+   "title": "Penicillin",
+   "years": [
+    1928
+   ],
+   "year_first": 1928,
+   "year_last": 1928,
+   "multi_year": false
+  },
+  {
+   "rank": 74,
+   "title": "Antimatter",
+   "years": [
+    1929
+   ],
+   "year_first": 1929,
+   "year_last": 1929,
+   "multi_year": false
+  },
+  {
+   "rank": 75,
+   "title": "Neutron",
+   "years": [
+    1932
+   ],
+   "year_first": 1932,
+   "year_last": 1932,
+   "multi_year": false
+  },
+  {
+   "rank": 76,
+   "title": "Cell Structure",
+   "years": [
+    1933
+   ],
+   "year_first": 1933,
+   "year_last": 1933,
+   "multi_year": false
+  },
+  {
+   "rank": 77,
+   "title": "The Function of Genes",
+   "years": [
+    1934
+   ],
+   "year_first": 1934,
+   "year_last": 1934,
+   "multi_year": false
+  },
+  {
+   "rank": 78,
+   "title": "Ecosystem",
+   "years": [
+    1935
+   ],
+   "year_first": 1935,
+   "year_last": 1935,
+   "multi_year": false
+  },
+  {
+   "rank": 79,
+   "title": "Weak and Strong Force",
+   "years": [
+    1937,
+    1983
+   ],
+   "year_first": 1937,
+   "year_last": 1983,
+   "multi_year": true
+  },
+  {
+   "rank": 80,
+   "title": "Metabolism",
+   "years": [
+    1938
+   ],
+   "year_first": 1938,
+   "year_last": 1938,
+   "multi_year": false
+  },
+  {
+   "rank": 81,
+   "title": "Coelacanth",
+   "years": [
+    1938
+   ],
+   "year_first": 1938,
+   "year_last": 1938,
+   "multi_year": false
+  },
+  {
+   "rank": 82,
+   "title": "Nuclear Fission",
+   "years": [
+    1939
+   ],
+   "year_first": 1939,
+   "year_last": 1939,
+   "multi_year": false
+  },
+  {
+   "rank": 83,
+   "title": "Blood Plasma",
+   "years": [
+    1940
+   ],
+   "year_first": 1940,
+   "year_last": 1940,
+   "multi_year": false
+  },
+  {
+   "rank": 84,
+   "title": "Semiconductor Transistor",
+   "years": [
+    1947
+   ],
+   "year_first": 1947,
+   "year_last": 1947,
+   "multi_year": false
+  },
+  {
+   "rank": 85,
+   "title": "The Big Bang",
+   "years": [
+    1948
+   ],
+   "year_first": 1948,
+   "year_last": 1948,
+   "multi_year": false
+  },
+  {
+   "rank": 86,
+   "title": "Definition of Information",
+   "years": [
+    1948
+   ],
+   "year_first": 1948,
+   "year_last": 1948,
+   "multi_year": false
+  },
+  {
+   "rank": 87,
+   "title": "Jumpin' Genes",
+   "years": [
+    1950
+   ],
+   "year_first": 1950,
+   "year_last": 1950,
+   "multi_year": false
+  },
+  {
+   "rank": 88,
+   "title": "Fusion",
+   "years": [
+    1951
+   ],
+   "year_first": 1951,
+   "year_last": 1951,
+   "multi_year": false
+  },
+  {
+   "rank": 89,
+   "title": "Origins of Life",
+   "years": [
+    1952
+   ],
+   "year_first": 1952,
+   "year_last": 1952,
+   "multi_year": false
+  },
+  {
+   "rank": 90,
+   "title": "DNA",
+   "years": [
+    1953
+   ],
+   "year_first": 1953,
+   "year_last": 1953,
+   "multi_year": false
+  },
+  {
+   "rank": 91,
+   "title": "Seafloor Spreading",
+   "years": [
+    1957
+   ],
+   "year_first": 1957,
+   "year_last": 1957,
+   "multi_year": false
+  },
+  {
+   "rank": 92,
+   "title": "The Nature of the Atmosphere",
+   "years": [
+    1960
+   ],
+   "year_first": 1960,
+   "year_last": 1960,
+   "multi_year": false
+  },
+  {
+   "rank": 93,
+   "title": "Quarks",
+   "years": [
+    1962
+   ],
+   "year_first": 1962,
+   "year_last": 1962,
+   "multi_year": false
+  },
+  {
+   "rank": 94,
+   "title": "Quasars and Pulsars",
+   "years": [
+    1963,
+    1967
+   ],
+   "year_first": 1963,
+   "year_last": 1967,
+   "multi_year": true
+  },
+  {
+   "rank": 95,
+   "title": "Complete Evolution",
+   "years": [
+    1967
+   ],
+   "year_first": 1967,
+   "year_last": 1967,
+   "multi_year": false
+  },
+  {
+   "rank": 96,
+   "title": "Dark Matter",
+   "years": [
+    1970
+   ],
+   "year_first": 1970,
+   "year_last": 1970,
+   "multi_year": false
+  },
+  {
+   "rank": 97,
+   "title": "The Nature of Dinosaurs",
+   "years": [
+    1976
+   ],
+   "year_first": 1976,
+   "year_last": 1976,
+   "multi_year": false
+  },
+  {
+   "rank": 98,
+   "title": "Planets Exist Around Other Stars",
+   "years": [
+    1995
+   ],
+   "year_first": 1995,
+   "year_last": 1995,
+   "multi_year": false
+  },
+  {
+   "rank": 99,
+   "title": "Accelerating Universe",
+   "years": [
+    1998
+   ],
+   "year_first": 1998,
+   "year_last": 1998,
+   "multi_year": false
+  },
+  {
+   "rank": 100,
+   "title": "Human Genome",
+   "years": [
+    2003
+   ],
+   "year_first": 2003,
+   "year_last": 2003,
+   "multi_year": false,
+   "ocr_corrected_from": "Fluman Genome"
+  }
+ ]
+}

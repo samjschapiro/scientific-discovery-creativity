@@ -72,3 +72,6 @@ wandb/
 runs/
 checkpoints/
 *.egg-info/
+
+# Claude Code per-machine settings
+.claude/settings.local.json

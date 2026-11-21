@@ -1,0 +1,37 @@
+output_dir: data/shaky_foundations/scale_foundations_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+
+# Candidate foundations: canonical Lacuna papers from these years with atoms, most cited first.
+foundation_year_min: 2010
+foundation_year_max: 2019
+n_foundations: 500
+pilot_config: configs/shaky_foundations/pilot_critiques.yaml   # marks the pilot cracks/controls
+
+# Attribution (same rule as the pilot, centroid proxy: embedding 500 foundations' neighbourhoods
+# would take hours; the pilot's emb_ outputs say how much the proxy loses).
+critique_type: limitation
+critique_lens: problems_and_motivation
+citer_year_min: 2010
+citer_year_max: 2025
+vector_layer: c200000
+ref_exclude_lenses: [problems_and_motivation]
+ref_atom_types: [mechanism, principle, limitation, dataset]   # what a reference proposes (not its findings)
+margin: 0.02
+same_limitation_layer: c20000
+concentration_layer: c2000
+
+# Shakiness = concentration rarefied to the same number of critics for every foundation.
+rarefy_n: 20
+rarefy_reps: 100
+early_window_years: 4
+messenger_atom_types: [mechanism, principle, finding]   # own claims in the top limitation concept -> messenger      # conc_early uses critics published within this many years of the foundation
+
+# Displacement (displacement.py)
+early_years: 3
+top_k_partners: 20
+min_partners: 2
+min_community: 50
+tail_years: 2
+seed: 0

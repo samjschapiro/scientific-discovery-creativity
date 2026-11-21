@@ -1,0 +1,23 @@
+output_dir: "data/format_sensitivity/hillside_first_cut_gemini"
+
+# Environment #1 (Hillside). Stimuli live in src/format_sensitivity/stimuli.py.
+skin: "hillside"
+provider: "openrouter"
+model: "google/gemini-3.1-pro-preview"   # preview IDs can be withdrawn mid-experiment;
+                                          # google/gemini-3.5-flash is the stable alternative
+max_tokens: 16000
+thinking: "adaptive"   # adaptive | disabled — an experimental variable, not a default
+effort: "high"     # anthropic: low|medium|high|xhigh|max   openrouter: low|medium|high
+
+max_workers: 4
+seed: 1000             # fixes F3 document order per sample; sample i uses seed + i
+
+# First cut: the two cells that decide whether the hypothesis survives.
+# F0 = original narrative, F3 = multi-source bundle.
+formats: ["F0", "F3"]
+framings: ["P_PUZZLE", "P_SUMMARIZE"]
+
+# Run in fresh contexts. Without these, a jump-rate drop is uninterpretable.
+probes: ["comprehension", "referent"]
+
+n_samples: 20

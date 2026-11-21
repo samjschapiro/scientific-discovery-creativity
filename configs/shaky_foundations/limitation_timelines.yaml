@@ -1,0 +1,113 @@
+output_dir: data/shaky_foundations/limitation_timelines_v1
+layout: grid            # grid (all examples, descriptions in-figure) | camera_ready (1 row, caption file)
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+hits_path: data/shaky_foundations/scale_foundations_v2/hits.parquet
+scored_path: data/shaky_foundations/scale_foundations_v2/foundations_scored.csv
+group_layer: c20000
+year_max: 2025
+
+# Vectors for matching critics' own mechanisms to their limitation (critics.csv); shared cache.
+embedding: {model: BAAI/bge-large-en-v1.5, device: mps, cache_dir: data/shaky_foundations/atom_vectors}
+
+# Gold-set examples where the known limitation was identified (evaluate_gold_v1/manual_judgments.csv).
+# limitations: one line each (max 3). ranks = the foundation's limitation groups (ranked by distinct critics,
+# critiques through year_max) merged into that line because they say the same thing.
+# foundation_desc / limitation_desc: two sentences each for a reader with general AI familiarity,
+# written by Claude (2026-11-21) from background knowledge; shown above each panel.
+examples:
+- title: Practical Bayesian Optimization of Machine Learning Algorithms
+  short: Bayesian optimization (GP)
+  limitations:
+  - label: high-dimensional search
+    ranks:
+    - 1
+  - label: GP cost
+    ranks:
+    - 2
+    - 3
+  foundation_desc: Fits a Gaussian-process model of validation performance and uses it to choose the next hyperparameter setting to try, balancing exploration of uncertain regions against exploitation of promising ones. It made Bayesian optimization a practical default for tuning machine-learning models.
+  limitation_desc: Exact Gaussian-process inference costs cubic time in the number of evaluations, and the surrogate becomes unreliable as the number of hyperparameters grows. Critics argue it does not scale to many observations or high-dimensional search spaces.
+- title: 'ShapeNet: An Information-Rich 3D Model Repository'
+  short: ShapeNet
+  limitations:
+  - label: synthetic-to-real gap
+    ranks:
+    - 1
+  foundation_desc: A large repository of 3D CAD models annotated with object categories, parts and canonical alignments. It became the standard training and benchmark data for 3D shape classification, reconstruction and generation.
+  limitation_desc: Its models are clean, complete, aligned synthetic meshes, unlike the noisy, partial and cluttered scans real sensors produce. Methods trained on it degrade on real-world 3D data.
+- title: Learning Deep Features for Discriminative Localization
+  short: Class activation maps
+  limitations:
+  - label: most discriminative part only
+    ranks:
+    - 1
+  - label: pooling loses spatial detail
+    ranks:
+    - 2
+  foundation_desc: Class activation mapping turns a CNN with global average pooling into a weakly supervised localizer by projecting the classifier's weights back onto the last convolutional feature maps. The heatmap shows which image regions drive a class prediction, using image-level labels only.
+  limitation_desc: The map concentrates on the single most discriminative part of an object, such as a bird's head, rather than its full extent. That makes it a weak basis for full-object localization or segmentation.
+- title: In-Datacenter Performance Analysis of a Tensor Processing Unit
+  short: TPU
+  limitations:
+  - label: memory bandwidth
+    ranks:
+    - 1
+    - 2
+  - label: memory capacity
+    ranks:
+    - 4
+  - label: low-precision mismatch
+    ranks:
+    - 5
+  foundation_desc: Google's analysis of its first in-datacenter Tensor Processing Unit, a custom matrix-multiply accelerator for neural-network inference. It reported large speed and energy-efficiency gains over contemporary CPUs and GPUs on production workloads.
+  limitation_desc: Many neural-network workloads on such accelerators are limited by memory bandwidth and capacity rather than arithmetic, so compute units sit idle waiting for data. Later papers frame this as the memory wall for accelerators.
+- title: 'BioBERT: a pre-trained biomedical language representation model for biomedical text mining'
+  short: BioBERT
+  limitations:
+  - label: vocabulary gap
+    ranks:
+    - 1
+    - 2
+  - label: domain knowledge gap
+    ranks:
+    - 3
+  foundation_desc: BERT further pre-trained on PubMed abstracts and PMC full-text articles to give a biomedical language model. It improved biomedical named-entity recognition, relation extraction and question answering.
+  limitation_desc: It keeps the general-domain BERT vocabulary, so biomedical terms are split into many sub-word pieces, and it inherits gaps in specialized domain knowledge. Later work argued for biomedical vocabularies and domain-specific pre-training from scratch.
+- title: Overcoming catastrophic forgetting in neural networks
+  short: EWC
+  limitations:
+  - label: needs task boundaries
+    ranks:
+    - 1
+    - 4
+  - label: Fisher information cost
+    ranks:
+    - 5
+  foundation_desc: Elastic weight consolidation reduces catastrophic forgetting in continual learning by penalizing changes to parameters that mattered for earlier tasks, with importance estimated from the Fisher information. It lets one network learn tasks in sequence without retraining on old data.
+  limitation_desc: It assumes clear boundaries between tasks, so it knows when to estimate importance and consolidate. In realistic data streams where tasks shift gradually or are unlabeled, that assumption breaks.
+- title: Neural Architecture Search with Reinforcement Learning
+  short: NAS (RL)
+  limitations:
+  - label: search cost
+    ranks:
+    - 1
+    - 3
+  - label: constrained search space
+    ranks:
+    - 2
+  foundation_desc: A recurrent controller trained with reinforcement learning generates neural-network architectures and is rewarded with each trained candidate's validation accuracy. It found architectures competitive with the best hand-designed ones.
+  limitation_desc: Every candidate must be trained to obtain its reward, so the search cost thousands of GPU-days. That put it out of reach for most labs and motivated much cheaper search methods.
+- title: Large Scale GAN Training for High Fidelity Natural Image Synthesis
+  short: BigGAN
+  limitations:
+  - label: instability / mode collapse
+    ranks:
+    - 1
+    - 5
+  - label: diversity-fidelity trade-off
+    ranks:
+    - 4
+  foundation_desc: Scaled class-conditional GANs to very large batches and models on ImageNet, adding tricks such as orthogonal regularization and the truncation trick. It produced a large jump in generated-image fidelity.
+  limitation_desc: Training is still unstable and eventually collapses at this scale, so it needs early stopping, and higher fidelity comes at the cost of sample diversity. Later papers cite instability and mode collapse as unresolved.

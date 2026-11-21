@@ -1,0 +1,19 @@
+output_dir: "data/sci_twist/assay_house_first_cut"
+
+# Primary arm is Claude via the native Anthropic SDK.
+provider: "anthropic"
+model: "claude-opus-4-8"
+
+# The incumbency delta lives in the WITH_M vs WITHOUT_M contrast; CONTROL is the
+# negative control (incumbent is correct — reframing is over-reach).
+variants: ["WITH_M", "WITHOUT_M", "CONTROL"]
+include_control: true
+
+# seed: null -> the canonical instance (forces T(C,E) = +1). Set an integer to draw a
+# fresh random retrieval-proof instance (a different forced value, verified at build).
+seed: null
+
+samples: 10          # per cell; with the fixed canonical instance this measures consistency
+max_tokens: 8192
+thinking: "adaptive"
+effort: "high"

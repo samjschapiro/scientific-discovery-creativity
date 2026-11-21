@@ -1,0 +1,25 @@
+output_dir: data/shaky_foundations/analogy_validation_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+analogy_dir: data/shaky_foundations/analogy_v2
+
+# Cues are matched (case-insensitive regex) only in atoms describing the paper's own contribution.
+# Problem/limitation atoms often describe *other* work ("conventional physics-inspired models fail...").
+cue_atom_types: [mechanism, principle, finding]
+cues:
+  inspired_by: '\binspired by\b'
+  x_inspired: '\b(biologically|bio|nature|neuro|physics|brain|evolution|swarm)[- ]inspired\b'
+  analogy: '\banalog(y|ies|ous to|ically)\b'
+  originally_for: '\boriginally (developed|designed|proposed|introduced|used) (for|in)\b'
+  adapt_from: '\b(adapt|transfer|import|bring|port|borrow)(s|ed|ing)? (ideas?|techniques?|concepts?|methods?|tools?|principles?|insights?) from\b'
+  from_field: '\b(from|of) (statistical physics|physics|biology|neuroscience|economics|ecology|epidemiology|thermodynamics|game theory|control theory|signal processing|linguistics|psychology|evolution|immunology|optics|fluid dynamics)\b'
+# Dropped after reading samples: 'borrow' alone ("borrow strength", channel borrowing), 'mimic' (MIMIC dataset).
+
+scores: [analogy_nn1_max, analogy_nnk_max, analogy_wmean_max, analogy_nn1_mean, analogy_nnk_mean, analogy_wmean_mean,
+         dsi, pm_distance, novel_pair_frac]
+covariates: [n_atoms_used, n_mech_established, log_home_size]
+precision_sample_per_cue: 15
+bootstrap_n: 300
+seed: 0

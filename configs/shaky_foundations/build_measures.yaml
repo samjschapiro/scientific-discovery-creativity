@@ -1,0 +1,20 @@
+output_dir: data/shaky_foundations/measures_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+
+# Sample: Lacuna papers in this range that are OpenAlex-matched, have references and have atoms.
+year_min: 2010
+year_max: 2019          # F/E/G only covers up to 2019; CD needs 5 years after publication
+sample_size: 250000    # > eligible pool, so this is the full population
+debug_sample_size: 1000
+seed: 0
+include_all_gap_openers: true   # only ~500 exist; flagged by in_random_sample = false
+
+cd_window_years: 5
+vector_layer: c200000   # stand-in for per-atom embeddings (see atom_measures.py)
+novelty_layer: f20000   # frozen at 2014 (no hindsight)
+
+fang_efg_path: data/fang_2025_efg/openalex_efg_y5.parquet
+kedrick_labels_path: data/kedrick_2025_gap_openers/gap_openers_open_access/data/figure2_real.csv
+kedrick_cd_path: data/kedrick_2025_gap_openers/gap_openers_open_access/data/figure4_data_cdtile.csv

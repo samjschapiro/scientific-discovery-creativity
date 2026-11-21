@@ -1,0 +1,58 @@
+output_dir: data/shaky_foundations/limitation_timelines_camera_v1
+layout: camera_ready    # 1 row, 7 in wide, PDF + 300-dpi PNG; descriptions go to caption.md in output_dir
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+hits_path: data/shaky_foundations/scale_foundations_v2/hits.parquet
+scored_path: data/shaky_foundations/scale_foundations_v2/foundations_scored.csv
+group_layer: c20000
+year_max: 2025
+
+# Vectors for matching critics' own mechanisms to their limitation (critics.csv); shared cache.
+embedding: {model: BAAI/bge-large-en-v1.5, device: mps, cache_dir: data/shaky_foundations/atom_vectors}
+
+# The two most-cited foundations whose known limitation was identified (Adam is cited more but its
+# matched group was unreliable; see evaluate_gold_v1). Each limitation = one line; ranks = its merged
+# concept groups, chosen after reading example critiques (2026-11-21).
+# solvers: critics on that line whose OWN proposed method (partially) fixes the limitation, judged by Claude
+# (2026-11-21) from title + closest mechanism atom in critics.csv. Excluded: papers that only apply an existing
+# fix, surveys/studies, and fixes for a different limitation. Famous fixes that are not themselves counted as
+# critics of the foundation (e.g. Linformer, ResNet, MobileNet) cannot appear.
+# Descriptions written by Claude (2026-11-21) from background knowledge.
+examples:
+  - title: "Attention is All you Need"
+    short: "Transformer"
+    paper: "Vaswani et al., 2017"
+    limitations:
+      - label: "quadratic cost"
+        ranks: [1, 2, 3, 4, 6, 8, 15]
+        notable_solvers: ["Transformer-XL", "Informer", "Perceiver", "S4", "Autoformer"]
+        solvers: [577862, 857504, 643307, 2139238, 1625140, 424133, 396028, 1245822, 1859309, 1824423, 685900, 1398921, 1096838, 1183454, 1507530, 275722, 1369516, 1044721, 1779097, 846898, 1546337, 1060627, 1027700, 347137, 234062, 162822, 1805417, 1063335, 1273571, 738559, 277306, 1991155, 2021128, 2086272, 1402626, 1734601, 317020, 835854, 1089623, 1231825, 778602, 239282, 371745, 2117092, 302823, 2070460, 614254, 1451633, 1255669, 1729214, 2209580, 2085434, 1643944, 1745006, 1021198]
+      - label: "position / order"
+        ranks: [7, 14]
+        notable_solvers: ["distance-based self-attention", "cross-lingual position representations"]
+        solvers: [123884, 707724, 1876351]   # cross-lingual position repr.; distance-based SAN; structural relative attention
+      - label: "sequential decoding"
+        ranks: [12, 16]
+        notable_solvers: ["Blockwise Parallel Decoding"]
+        solvers: [963858, 455433]   # Blockwise Parallel Decoding; GeneFormer parallel groups
+    foundation_desc: "Introduced the Transformer, a sequence model built entirely from self-attention and feed-forward layers, without recurrence or convolution. It became the basis of modern language models."
+    limitation_desc: "Every token attends to every other token, so time and memory grow quadratically with sequence length, the most-cited barrier to long inputs. Later papers also note that attention ignores token order unless positions are added, and that autoregressive decoding is slow."
+  - title: "Very Deep Convolutional Networks for Large-Scale Image Recognition"
+    short: "VGG"
+    paper: "Simonyan & Zisserman, 2015"
+    limitations:
+      - label: "vanishing gradients"
+        ranks: [1]
+        notable_solvers: ["Convolutional Pose Machines", "Residual Attention Network"]
+        solvers: [657195, 2069655, 1400117, 1421868]   # Conv. Pose Machines; Residual Attention Net; dense shortcuts; multi-stage losses
+      - label: "parameter redundancy"
+        ranks: [2, 3, 6]
+        notable_solvers: ["All Convolutional Net"]
+        solvers: [310324, 2130591, 750316, 1540343, 1243356, 1051307, 1132292, 1989664, 360681, 955552]   # All-Conv Net, decoupled convs, ...
+      - label: "edge-deployment cost"
+        ranks: [5, 12]
+        notable_solvers: ["Fast-SCNN"]
+        solvers: [94087, 322132, 1839748, 1354551, 747877, 1724675]   # Fast-SCNN, Glance-and-Focus, Led3D, distillation, sparsification
+    foundation_desc: "Showed that stacking many small 3x3 convolutions into very deep networks (16-19 layers) markedly improves image recognition. Its pretrained models became standard feature extractors."
+    limitation_desc: "Plain deep stacks are hard to optimize because gradients weaken through many layers. Its roughly 138M parameters (over 500 MB) are largely redundant and too costly for mobile and embedded deployment."

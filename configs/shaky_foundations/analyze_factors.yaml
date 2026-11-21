@@ -1,0 +1,9 @@
+output_dir: data/shaky_foundations/factors_v2
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+
+# Fang shares sum to 1, so fang_e is left out (it is 1 - F - G).
+# log_citers5 (impact) is in on purpose: do the creativity measures form dimensions separate from impact?
+measures: [cd, fang_f, fang_g, dsi, pm_distance, novel_pair_frac, pmi_p10, log_citers5, log_refs]
+parallel_reps: 20
+bootstrap_n: 300
+seed: 0

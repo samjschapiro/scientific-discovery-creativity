@@ -1,0 +1,15 @@
+output_dir: data/shaky_foundations/critique_profiles_2024plus_v1
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+hits_path: data/shaky_foundations/scale_foundations_2024plus_v1/hits.parquet          # critiques through Nov 2026
+scored_path: data/shaky_foundations/scale_foundations_2024plus_v1/foundations_scored.csv
+group_layer: c20000
+
+# The n most-cited 2024–2025 foundations (reviews/surveys excluded), whether or not a direction has emerged.
+n_papers: 16
+top_groups: 3
+title: "Critiques of the most-cited 2024–2025 AI papers so far (citing papers through Nov 2026; 2026 partial)"
+short_titles:   # display names for titles that do not shorten well
+  "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning": "DeepSeek-R1"
+  "The Llama 3 Herd of Models": "Llama 3"

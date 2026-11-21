@@ -1,0 +1,13 @@
+output_dir: data/shaky_foundations/analogy_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+
+# Focal papers: the same pool as build_measures, so the scores join 1:1 onto measures.parquet.
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+
+layer: f20000            # frozen at 2014: homes and transfers use no hindsight
+min_home_papers: 5       # mechanism concept must appear in >= this many earlier papers to count as established
+debug_sample_size: 2000
+seed: 0
+min_pair_papers: 3       # nnk variant: a home problem counts only if >= this many earlier papers paired it with the mechanism

@@ -1,0 +1,18 @@
+output_dir: "data/format_sensitivity/filament_first_cut_grok"
+
+# Novel-surface re-individuation. Skin + skeleton in src/format_sensitivity/.
+skin: "filament"
+provider: "openrouter"
+model: "x-ai/grok-4.5"
+max_tokens: 16000
+thinking: "adaptive"
+effort: "high"
+
+max_workers: 4
+seed: 1000
+
+formats: ["F0", "F3"]
+framings: ["P_PUZZLE", "P_SUMMARIZE"]
+probes: ["comprehension", "referent"]
+
+n_samples: 20

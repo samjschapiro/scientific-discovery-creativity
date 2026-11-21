@@ -1,0 +1,27 @@
+output_dir: data/shaky_foundations/foundation_status_v1
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+fang_efg_path: data/fang_2025_efg/openalex_efg_y5.parquet
+
+# The "most cited" candidate lists from the scale-ups.
+sets:
+  "2010-2019 top 500": data/shaky_foundations/scale_foundations_v2/foundations_scored.csv
+  "2020-2023 top 300": data/shaky_foundations/scale_foundations_2020s_v1/foundations_scored.csv
+  "2024-2025 top 150": data/shaky_foundations/scale_foundations_2024plus_v1/foundations_scored.csv
+
+window_years: 5        # Fang & Evans use 5-year citations
+year_cap: 2026         # recent papers get what exists (2026 partial)
+
+# Baseline: the same indices for a random sample of ordinary papers from the same years, so "foundation"
+# is judged against what is typical, not against an absolute share.
+baseline_per_set: 3000
+min_citers: 5
+seed: 0
+
+# Kind of paper, from title (case-insensitive regex, first match wins); everything else = "method / idea".
+kinds:
+  survey / review: '\b(survey|review|overview|tutorial|primer)\b'
+  technical report / system card: '\b(technical report|system card|model card|herd of models|family of .*models)\b'
+  dataset / benchmark: '\b(dataset|benchmark|corpus|database|repository|challenge)\b'
+  software / tool / hardware: '\b(library|toolkit|framework for|software|in python|scikit|pytorch|tensorflow|caffe|keras|theano|processing unit)\b'

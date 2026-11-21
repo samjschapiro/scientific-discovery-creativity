@@ -1,0 +1,24 @@
+output_dir: data/shaky_foundations/audit_corpus_v2
+
+# Symlink to the package as delivered (~/Downloads). Package name is checked against manifest.json.
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+
+# Exact-title (case-insensitive) lookups for papers any "foundation" list must contain.
+landmark_titles:
+  - Attention is All you Need
+  - ImageNet Classification with Deep Convolutional Neural Networks
+  - Deep Residual Learning for Image Recognition
+  - "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+  - Language Models are Few-Shot Learners
+  - Generative Adversarial Nets
+  - "Adam: A Method for Stochastic Optimization"
+  - Long Short-Term Memory
+  - "Dropout: A Simple Way to Prevent Neural Networks from Overfitting"
+  - Denoising Diffusion Probabilistic Models
+  - Auto-Encoding Variational Bayes
+  - Human-level control through deep reinforcement learning
+
+top_cited_n: 500
+samples_per_lens: 25
+sample_seed: 0

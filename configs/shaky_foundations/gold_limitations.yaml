@@ -1,0 +1,81 @@
+# Gold set: known limitations that later papers raised against a foundation.
+#
+# Written by Claude (claude-opus-5-5) on 2026-11-21 from background knowledge of the ML literature,
+# NOT from a literature review, and before looking at any pipeline output for the test foundations.
+# Should be reviewed by the team. Each limitation is phrased the way a citing paper would state it.
+#
+# split: calibration = the pilot cracks (I had already judged these by hand, so they are used to
+#        set the matching threshold); test = 50 foundations sampled from the top-500 scale-up
+#        (seed 20261121, pilot ones excluded).
+# seen:  true if I had already seen this foundation's top limitation label in earlier output
+#        (blindness compromised; results are reported with and without these).
+# skip:  reviews, position papers and pure "finding" papers, where "the limitation of its method"
+#        is not well defined. Listed so the sample of 50 stays visible.
+# confidence: how sure I am that this limitation is widely raised in the literature.
+
+foundations:
+  # ---------------- calibration (pilot cracks) ----------------
+  - {title: "Attention is All you Need", split: calibration, limitations: ["self-attention has quadratic time and memory cost in sequence length, so long sequences are prohibitively expensive"]}
+  - {title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", split: calibration, limitations: ["batch statistics become noisy and unreliable with small mini-batch sizes"]}
+  - {title: "Generative Adversarial Nets", split: calibration, limitations: ["adversarial training is unstable, with vanishing generator gradients and mode collapse"]}
+  - {title: "Adam: A Method for Stochastic Optimization", split: calibration, limitations: ["Adam can fail to converge and generalizes worse than SGD"]}
+  - {title: "Distributed Representations of Words and Phrases and their Compositionality", split: calibration, limitations: ["static word embeddings assign one context-independent vector per word and cannot handle polysemy"]}
+  - {title: "GloVe: Global Vectors for Word Representation", split: calibration, limitations: ["static word embeddings assign one context-independent vector per word and cannot handle polysemy"]}
+  - {title: "Sequence to Sequence Learning with Neural Networks", split: calibration, limitations: ["compressing the whole input sequence into a single fixed-length vector is a bottleneck for long sentences"]}
+  - {title: "Very Deep Convolutional Networks for Large-Scale Image Recognition", split: calibration, limitations: ["very deep plain networks suffer from vanishing gradients and degradation", "huge parameter count and memory footprint"]}
+  - {title: "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks", split: calibration, limitations: ["hand-designed anchor boxes and the two-stage pipeline are slow and require heuristic tuning"]}
+  - {title: "Auto-Encoding Variational Bayes", split: calibration, limitations: ["variational autoencoders produce blurry samples and lose high-frequency detail"]}
+  - {title: "Semi-Supervised Classification with Graph Convolutional Networks", split: calibration, limitations: ["stacking many graph convolution layers causes over-smoothing, so node representations become indistinguishable"]}
+  - {title: "Playing Atari with Deep Reinforcement Learning", split: calibration, limitations: ["Q-learning overestimates action values, making deep Q-network training unstable"]}
+
+  # ---------------- test (sample of 50) ----------------
+  - {title: "Practical Bayesian Optimization of Machine Learning Algorithms", split: test, confidence: high, limitations: ["Gaussian-process Bayesian optimization scales cubically with the number of observations and poorly to high-dimensional search spaces", "sequential evaluation is hard to parallelize"]}
+  - {title: "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation", split: test, confidence: high, limitations: ["the straight-through estimator gives biased gradients because the backward pass does not match the discrete forward pass"]}
+  - {title: "Sinkhorn Distances: Lightspeed Computation of Optimal Transport", split: test, confidence: high, limitations: ["entropic regularization biases and blurs the transport plan", "Sinkhorn iterations are numerically unstable for small regularization and still quadratic in the number of points"]}
+  - {title: "OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks", split: test, confidence: medium, limitations: ["dense multi-scale sliding-window evaluation is computationally expensive and localizes less accurately than region-based detectors"]}
+  - {title: "Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps", split: test, confidence: high, limitations: ["gradient-based saliency maps are noisy and unreliable, and fail sanity checks of faithfulness to the model"]}
+  - {title: "Explaining and Harnessing Adversarial Examples", split: test, confidence: high, limitations: ["single-step FGSM attacks are weak, and FGSM adversarial training gives robustness only against weak attacks (label leaking, catastrophic overfitting)"]}
+  - {title: "ShapeNet: An Information-Rich 3D Model Repository", split: test, confidence: high, limitations: ["synthetic CAD models are clean and aligned, leaving a domain gap to noisy, cluttered real-world 3D scans"]}
+  - {title: "Learning Spatiotemporal Features with 3D Convolutional Networks", split: test, seen: true, confidence: high, limitations: ["3D convolutions are computationally expensive with many parameters", "short clips cannot model long-range temporal structure"]}
+  - {title: "LINE: Large-scale Information Network Embedding", split: test, seen: true, confidence: medium, limitations: ["only first- and second-order proximity, missing higher-order structure", "transductive: cannot embed unseen nodes or use node attributes"]}
+  - {title: "Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting", split: test, confidence: medium, limitations: ["predictions become blurry over longer horizons", "location-invariant recurrent filters cannot model spatially varying motion"]}
+  - {title: "Single image super-resolution from transformed self-exemplars", split: test, confidence: medium, limitations: ["patch search is slow", "fails when the image lacks repeating self-similar patterns"]}
+  - {title: "Holistically-Nested Edge Detection", split: test, confidence: high, limitations: ["predicted edges are thick and blurry rather than crisp, needing non-maximum suppression and thinning"]}
+  - {title: "Variational Inference with Normalizing Flows", split: test, confidence: high, limitations: ["planar and radial flows have limited expressivity and need many layers", "computing Jacobian determinants restricts which transformations can be used"]}
+  - {title: "FaceNet: A unified embedding for face recognition and clustering", split: test, confidence: high, limitations: ["triplet loss needs careful hard-triplet mining and converges slowly", "requires very large training datasets"]}
+  - {title: "NetVLAD: CNN Architecture for Weakly Supervised Place Recognition", split: test, confidence: medium, limitations: ["high-dimensional descriptors are memory-hungry", "poor robustness to large appearance changes such as day-night or seasonal variation"]}
+  - {title: "Learning Deep Features for Discriminative Localization", split: test, confidence: high, limitations: ["class activation maps highlight only the most discriminative part of the object rather than its full extent", "requires a global-average-pooling architecture and gives low-resolution maps"]}
+  - {title: "High-Dimensional Continuous Control Using Generalized Advantage Estimation John Schulman", split: test, seen: true, confidence: low, limitations: ["on-policy policy-gradient methods remain sample-inefficient", "bias-variance trade-off parameter lambda requires tuning"]}
+  - {title: "Perceptual Losses for Real-Time Style Transfer and Super-Resolution", split: test, confidence: high, limitations: ["one feed-forward network must be trained per style, so arbitrary styles are not supported", "perceptual losses introduce artifacts and lower pixel fidelity"]}
+  - {title: "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs) Djork-Arné Clevert", split: test, confidence: low, limitations: ["the exponential is more expensive to compute than ReLU", "gains are inconsistent across architectures"]}
+  - {title: "Variational Inference: A Review for Statisticians.", split: test, skip: review}
+  - {title: "Stacked Hourglass Networks for Human Pose Estimation", split: test, confidence: medium, limitations: ["heavy computation and parameter count", "low-resolution heatmaps cause quantization error in keypoint localization"]}
+  - {title: "Learning Multi-domain Convolutional Neural Networks for Visual Tracking", split: test, confidence: high, limitations: ["online fine-tuning makes tracking very slow and far from real time"]}
+  - {title: "In-Datacenter Performance Analysis of a Tensor Processing Unit", split: test, confidence: low, limitations: ["specialized for low-precision inference with limited flexibility for evolving model types", "performance is bound by memory bandwidth"]}
+  - {title: "Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms", split: test, seen: true, confidence: high, limitations: ["small, low-resolution, grayscale, centered images that are too simple and saturated to represent real-world vision"]}
+  - {title: "ECO: Efficient Convolution Operators for Tracking", split: test, confidence: low, limitations: ["correlation-filter trackers suffer from boundary effects and drift under occlusion and deformation"]}
+  - {title: "Unsupervised Monocular Depth Estimation with Left-Right Consistency", split: test, confidence: high, limitations: ["photometric self-supervision fails on occlusions, textureless and reflective surfaces", "training requires rectified stereo pairs"]}
+  - {title: "Neural Architecture Search with Reinforcement Learning", split: test, seen: true, confidence: high, limitations: ["the search costs thousands of GPU-days, making it prohibitively expensive"]}
+  - {title: "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks", split: test, confidence: high, limitations: ["second-order gradients through the inner loop are computationally expensive and memory-hungry", "training is unstable and sensitive to hyperparameters"]}
+  - {title: "Overcoming catastrophic forgetting in neural networks", split: test, confidence: high, limitations: ["the diagonal Fisher approximation of parameter importance is inaccurate", "the quadratic penalty does not scale to long task sequences and needs known task boundaries"]}
+  - {title: "Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization", split: test, seen: true, confidence: medium, limitations: ["matching only channel-wise mean and variance captures style poorly and causes artifacts and content distortion"]}
+  - {title: "Understanding deep learning requires rethinking generalization", split: test, skip: finding}
+  - {title: "Neural Discrete Representation Learning", split: test, confidence: high, limitations: ["codebook collapse: only a few codebook vectors are used", "non-differentiable quantization relies on straight-through gradient estimates"]}
+  - {title: "Rethinking Atrous Convolution for Semantic Image Segmentation", split: test, confidence: medium, limitations: ["atrous convolution at high output resolution is computationally and memory expensive", "object boundaries are coarse without a decoder"]}
+  - {title: "Fixing Weight Decay Regularization in Adam", split: test, confidence: low, limitations: ["adaptive methods with decoupled weight decay still need careful tuning of weight decay and learning-rate schedule"]}
+  - {title: "Categorical Reparameterization with Gumbel-Softmax", split: test, confidence: high, limitations: ["the continuous relaxation gives biased gradients", "results are sensitive to the temperature and its annealing schedule"]}
+  - {title: "Pruning Filters for Efficient ConvNets", split: test, seen: true, confidence: medium, limitations: ["the L1-norm magnitude criterion is a heuristic that does not reflect filter importance", "pruned networks need retraining or fine-tuning"]}
+  - {title: "An Overview of Multi-Task Learning in Deep Neural Networks", split: test, skip: review}
+  - {title: "Densely Connected Convolutional Networks", split: test, confidence: high, limitations: ["feature-map concatenation causes high memory consumption and slow training and inference"]}
+  - {title: "Optimization Methods for Large-Scale Machine Learning", split: test, skip: review}
+  - {title: "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling", split: test, confidence: medium, limitations: ["the receptive field of temporal convolutional networks is fixed and limited by depth and dilation"]}
+  - {title: "UNet++: A Nested U-Net Architecture for Medical Image Segmentation", split: test, confidence: medium, limitations: ["dense nested skip pathways add parameters, memory and computation"]}
+  - {title: "On the Convergence of Federated Optimization in Heterogeneous Networks", split: test, confidence: low, limitations: ["convergence analysis relies on bounded-dissimilarity assumptions that do not hold under strong data heterogeneity"]}
+  - {title: "Relational inductive biases, deep learning, and graph networks", split: test, skip: position}
+  - {title: "Addressing Function Approximation Error in Actor-Critic Methods", split: test, confidence: medium, limitations: ["clipped double Q-learning introduces underestimation bias", "deterministic policies explore poorly"]}
+  - {title: "Obfuscated Gradients Give a False Sense of Security: Circumventing Defenses to Adversarial Examples", split: test, skip: finding}
+  - {title: "CBAM: Convolutional Block Attention Module", split: test, confidence: medium, limitations: ["pooling-based channel and spatial attention captures only local context, not long-range dependencies", "adds computational overhead"]}
+  - {title: "Federated Learning: Challenges, Methods, and Future Directions.", split: test, skip: review}
+  - {title: "Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead", split: test, skip: position}
+  - {title: "BioBERT: a pre-trained biomedical language representation model for biomedical text mining", split: test, confidence: medium, limitations: ["reuses the general-domain BERT vocabulary, which fragments biomedical terms", "domain-specific pre-training is computationally expensive"]}
+  - {title: "Large Scale GAN Training for High Fidelity Natural Image Synthesis", split: test, seen: true, confidence: high, limitations: ["requires enormous compute and very large batches", "training still collapses at scale", "the truncation trick trades sample diversity for fidelity"]}

@@ -1,0 +1,22 @@
+output_dir: "data/format_sensitivity/hillside_framing_ladder_grok"
+
+# Environment #1 (Hillside). Stimuli live in src/format_sensitivity/stimuli.py.
+skin: "hillside"
+provider: "openrouter"
+model: "x-ai/grok-4.5"
+max_tokens: 16000
+thinking: "adaptive"   # adaptive | disabled — an experimental variable, not a default
+effort: "high"         # anthropic: low|medium|high|xhigh|max   openrouter: low|medium|high
+
+max_workers: 4
+seed: 1000             # fixes F3 document order per sample; sample i uses seed + i
+
+formats: ["F0", "F3"]
+
+# Descending revision-license. P_SUMMARIZE is the floor and a demand-characteristic
+# control, not a "no cue" condition. See stimuli.py.
+framings: ["P_PUZZLE", "P_REVIEW", "P_ASSESS", "P_SUMMARIZE"]
+
+probes: ["comprehension", "referent"]
+
+n_samples: 20

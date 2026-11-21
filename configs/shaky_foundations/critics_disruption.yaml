@@ -1,0 +1,17 @@
+output_dir: data/shaky_foundations/critics_disruption_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+measures_path: data/shaky_foundations/measures_v2/measures.parquet          # Fang F/E/G + CD, 2010-2019
+foundations_path: data/shaky_foundations/scale_foundations_v2/foundations_scored.csv   # top-500 foundations
+hits_path: data/shaky_foundations/scale_foundations_v2/hits.parquet         # critiques attributed to them
+
+critique_type: limitation
+critique_lens: problems_and_motivation
+# Each outcome is a within-year percentile; adj regresses out its covariates.
+outcomes:
+  disruption: {column: cd, covariates: [log_citers5, log_refs, n_unique_concepts]}
+  citations_total: {column: cites_total_2025, covariates: [log_refs, n_unique_concepts]}   # all OpenAlex, through 2025
+  citations_5y_lacuna: {column: log_citers5, covariates: [log_refs, n_unique_concepts]}    # Lacuna citers, 5 years
+bootstrap_n: 500
+seed: 0

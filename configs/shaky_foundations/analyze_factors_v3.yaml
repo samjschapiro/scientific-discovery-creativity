@@ -1,0 +1,10 @@
+output_dir: data/shaky_foundations/factors_v3
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+extra_measures_paths: [data/shaky_foundations/prescience_v1/prescience.parquet]
+
+# Taxonomy dimensions available so far (gap closing still missing). fang_e left out (= 1 - F - G);
+# pm_distance left out (near-duplicate of DSI); novel_pair_frac = surprise at publication.
+measures: [cd, fang_f, fang_g, dsi, novel_pair_frac, prescience, novel_pair_adoption, emergence, log_citers5, log_refs]
+parallel_reps: 20
+bootstrap_n: 300
+seed: 0

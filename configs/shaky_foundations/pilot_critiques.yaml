@@ -1,0 +1,55 @@
+output_dir: data/shaky_foundations/pilot_critiques_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+
+# Critiques: limitation atoms from the problems_and_motivation lens (they describe prior work).
+critique_type: limitation
+critique_lens: problems_and_motivation
+citer_year_min: 2010
+citer_year_max: 2025          # 2026 is incomplete
+
+# Attribution: a critique goes to the citer's in-corpus reference whose atoms it matches best,
+# only if the best reference beats the runner-up by >= margin (cosine).
+vector_layer: c200000         # centroid proxy for per-atom vectors (see atom_measures.py)
+ref_exclude_lenses: [problems_and_motivation]   # a reference's account of prior work is not the reference
+ref_atom_types: [mechanism, principle, limitation, dataset]   # what a reference proposes (not its findings)
+margin: 0.02
+same_limitation_layer: c20000 # top_limitations.csv groups attributed critiques by this layer (readable labels)
+concentration_layer: c2000    # same_limitation.csv: coarser, so near-duplicate concepts merge
+first_year_min_critics: 3     # "onset" = first year the top limitation has this many distinct critics (cumulative)
+top_limitations: 3
+
+precision_sample_per_foundation: 10
+label_pool_per_foundation: 12   # (critique, foundation) pairs per foundation for hand labelling
+
+# Real-vector re-score: each critique's proxy top-k shortlist is re-ranked with bge-large vectors.
+embedding:
+  model: BAAI/bge-large-en-v1.5
+  device: mps
+  cache_dir: data/shaky_foundations/atom_vectors   # shared, resumable cache (see embeddings.py)
+  shortlist_k: 5
+  margin: 0.02
+  patch_threshold: 0.80   # ~top quarter of critics. Calibrated by reading: separates builds-on from unrelated, but not patches from applies (noisy)
+seed: 0
+
+# Exact (case-insensitive) titles. kind: crack = a known limitation and a replacement; control = no
+# famous replacement in the window. successor_year marks the replacement on the plots.
+foundations:
+  - {title: "Attention is All you Need", kind: crack, crack: "quadratic attention cost", successor: "Longformer / Linformer / Performer", successor_year: 2020}
+  - {title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", kind: crack, crack: "small-batch dependence", successor: "Group Normalization", successor_year: 2018}
+  - {title: "Generative Adversarial Nets", kind: crack, crack: "training instability / mode collapse", successor: "Wasserstein GAN", successor_year: 2017}
+  - {title: "Adam: A Method for Stochastic Optimization", kind: crack, crack: "convergence / generalization", successor: "AMSGrad / AdamW", successor_year: 2018}
+  - {title: "Distributed Representations of Words and Phrases and their Compositionality", kind: crack, crack: "static, context-free embeddings", successor: "ELMo", successor_year: 2018}
+  - {title: "GloVe: Global Vectors for Word Representation", kind: crack, crack: "static, context-free embeddings", successor: "ELMo", successor_year: 2018}
+  - {title: "Sequence to Sequence Learning with Neural Networks", kind: crack, crack: "fixed-length bottleneck", successor: "Bahdanau attention", successor_year: 2015}
+  - {title: "Very Deep Convolutional Networks for Large-Scale Image Recognition", kind: crack, crack: "depth degradation / parameter count", successor: "ResNet", successor_year: 2016}
+  - {title: "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks", kind: crack, crack: "anchors / two-stage speed", successor: "FCOS / DETR", successor_year: 2019}
+  - {title: "Auto-Encoding Variational Bayes", kind: crack, crack: "blurry samples / posterior collapse", successor: "VQ-VAE", successor_year: 2017}
+  - {title: "Semi-Supervised Classification with Graph Convolutional Networks", kind: crack, crack: "over-smoothing in deep GCNs", successor: "GCNII / deeper-GCN fixes", successor_year: 2020}
+  - {title: "Playing Atari with Deep Reinforcement Learning", kind: crack, crack: "Q-value overestimation / instability", successor: "Double DQN", successor_year: 2016}
+  - {title: "Deep Residual Learning for Image Recognition", kind: control}
+  - {title: "U-Net: Convolutional Networks for Biomedical Image Segmentation", kind: control}
+  - {title: "Microsoft COCO: Common Objects in Context", kind: control}
+  - {title: "Scikit-learn: Machine Learning in Python", kind: control}
+  - {title: "XGBoost: A Scalable Tree Boosting System", kind: control}

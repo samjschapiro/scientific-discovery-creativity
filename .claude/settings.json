@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "WebFetch(domain:github.com)",
+      "Bash(pdftoppm -png -r 88 -f 3 -l 3 main.pdf /tmp/fig3)",
+      "Bash(git fetch *)",
+      "Bash(git pull *)"
+    ]
+  }
+}

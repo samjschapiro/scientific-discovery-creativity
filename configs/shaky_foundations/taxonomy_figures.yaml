@@ -1,0 +1,37 @@
+output_dir: data/shaky_foundations/taxonomy_figures_v1
+factors_dir: data/shaky_foundations/factors_v3
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+extra_measures_paths: [data/shaky_foundations/prescience_v1/prescience.parquet]
+
+# Names follow the blind-variation / selective-retention reading (report: 2026-11-21_creativity_taxonomy_bvsr).
+factor_names: ["F1 | Selection", "F2 | Variation", "F3 | Retention", "F4 | Embeddedness"]
+measure_labels:
+  novel_pair_adoption: "New pairs later adopted"
+  emergence: "Emergence (concept growth)"
+  prescience: "Prescience"
+  dsi: "Divergent semantic integration"
+  novel_pair_frac: "New concept pairs (surprise)"
+  log_citers5: "Citations (5 y)"
+  fang_f: "Foundation share"
+  cd: "Disruption (CD5)"
+  fang_g: "Generalization share"
+  log_refs: "References"
+measure_order: [novel_pair_adoption, emergence, prescience, dsi, novel_pair_frac, log_citers5, fang_f, cd, fang_g, log_refs]
+
+landmarks:   # offset = label position in points relative to the dot (Figure 2)
+  - {title: "Attention is All you Need", label: "Transformer"}
+  - {title: "Deep Residual Learning for Image Recognition", label: "ResNet", offset: [4, -9]}
+  - {title: "Generative Adversarial Nets", label: "GANs"}
+  - {title: "Adam: A Method for Stochastic Optimization", label: "Adam"}
+  - {title: "Auto-Encoding Variational Bayes", label: "VAE", offset: [5, 4]}
+  - {title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", label: "BatchNorm", offset: [-6, -8]}
+  - {title: "Semi-Supervised Classification with Graph Convolutional Networks", label: "GCN", offset: [-4, -9]}
+  - {title: "Distributed Representations of Words and Phrases and their Compositionality", label: "word2vec", offset: [6, 0]}
+  - {title: "Sequence to Sequence Learning with Neural Networks", label: "seq2seq", offset: [6, 0]}
+  - {title: "Neural Machine Translation by Jointly Learning to Align and Translate", label: "Bahdanau attention", offset: [-4, 9]}
+  - {title: "Very Deep Convolutional Networks for Large-Scale Image Recognition", label: "VGG", offset: [-6, -8]}
+  - {title: "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks", label: "Faster R-CNN", offset: [2, 10]}
+  - {title: "U-Net: Convolutional Networks for Biomedical Image Segmentation", label: "U-Net"}
+  - {title: "GloVe: Global Vectors for Word Representation", label: "GloVe", offset: [-6, -7]}
+  - {title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding", label: "BERT", offset: [6, 0]}
+  - {title: "Microsoft COCO: Common Objects in Context", label: "COCO"}

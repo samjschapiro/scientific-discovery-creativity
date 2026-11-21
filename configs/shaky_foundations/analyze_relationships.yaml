@@ -1,0 +1,8 @@
+output_dir: data/shaky_foundations/relationships_v2
+measures_path: data/shaky_foundations/measures_v2/measures.parquet
+
+measures: [cd, fang_f, fang_e, fang_g, dsi, pm_distance, novel_pair_frac, pmi_p10]
+covariates: [log_citers5, log_refs, n_unique_concepts]
+
+bootstrap_n: 500
+seed: 0

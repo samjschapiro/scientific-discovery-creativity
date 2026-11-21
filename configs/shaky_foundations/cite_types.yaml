@@ -1,0 +1,20 @@
+output_dir: data/shaky_foundations/cite_types_v1
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+pilot_config: configs/shaky_foundations/pilot_critiques.yaml        # which foundations (the 17 pilot ones)
+critiques_path: data/shaky_foundations/pilot_critiques_v2/proxy_attributions.parquet   # critique attributions
+critique_margin: 0.02
+
+vector_layer: c200000          # centroid proxy, so all ~430K citations can be scored
+citer_year_max: 2025
+efg_window_years: 30           # Fang label per citation, over the whole citing period (not just 5 years)
+
+# A citation is typed from two similarities between the citing paper and the foundation:
+#   s_mech = max cosine between the citer's mechanism atoms and the foundation's mechanism/principle atoms
+#   s_prob = max cosine between the citer's problem atoms and the foundation's problem atoms
+# "high" = top quarter of all scored citations on that similarity (pooled), since the centroid proxy
+# compresses cosines (median ~0.87). Check the resulting types in examples.csv.
+high_quantile: 0.75
+examples_per_type: 12
+seed: 0

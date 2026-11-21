@@ -1,0 +1,13 @@
+output_dir: data/shaky_foundations/prescience_v1
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+measures_path: data/shaky_foundations/measures_v2/measures.parquet   # focal = the build_measures pool (2010-2019)
+
+layer: f20000        # frozen at 2014: no hindsight in the concept boundaries
+future_years: 5      # future window t+1 .. t+5 (2019 papers -> 2024)
+recent_years: 3      # emergence baseline: concept share in t-2 .. t
+adoption_min: 3      # a new pair is "adopted" if >= this many papers use it in the future window
+eps: 1.0e-5          # floor on concept shares in the emergence log-ratio
+debug_sample_size: 3000
+seed: 0
