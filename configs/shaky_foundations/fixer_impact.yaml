@@ -1,0 +1,14 @@
+output_dir: data/shaky_foundations/fixer_impact_v2
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+candidates_dir: data/shaky_foundations/fixer_candidates_v1   # candidates.parquet + labels/*.jsonl (subagent judges)
+hits_path: data/shaky_foundations/scale_foundations_v2/hits.parquet   # critiques -> agreement (shakiness)
+scored_path: data/shaky_foundations/scale_foundations_v2/foundations_scored.csv   # conc_all = shakiness
+
+year_min: 2010
+year_max: 2022
+min_critics: [5, 10, 20]   # floors for the agreement-based dose analysis
+bootstrap_n: 1000      # over foundations
+n_permutations: 10000
+seed: 0

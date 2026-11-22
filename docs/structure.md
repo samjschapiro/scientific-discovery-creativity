@@ -18,12 +18,14 @@
 │       ├── embeddings.py        # bge-large atom-vector cache
 │       ├── displacement.py      # citation-only displacement (retention of a foundation's neighbourhood)
 │       ├── analogy.py           # analogical-novelty score (negative result)
+│       ├── ideagen.py           # idea-generation benchmark: briefing cards, candidate pools, scoring
 │       ├── figures.py           # figure_path: every figure -> data/shaky_foundations/figures/
 │       └── scripts/             # one entry point per analysis (each takes a config)
 ├── configs/<track>/             # YAML configs (output_dir, parameters); gold_limitations.yaml = gold set
 ├── scripts/<track>/             # bash wrappers: bash scripts/<track>/<name>.sh [--overwrite] [--debug]
 ├── data/                        # gitignored: Lacuna symlinks, external datasets, all outputs
 │   └── shaky_foundations/
+│       ├── fixer_candidates_v1/ # candidates, batches/, labels/ (Claude subagent judgments), judge_prompt.md
 │       ├── figures/             # ALL figures for the track, named <run>_<figure>.png/pdf
 │       └── <run>_vN/            # one folder per run (config.yaml + outputs)
 ├── docs/

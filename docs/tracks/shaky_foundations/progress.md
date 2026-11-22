@@ -48,7 +48,7 @@ comparison.
 - k-means concept layers. `f2800` and `f20000` are frozen at 2014, so use those for anything that
   predicts forward in time.
 
-## Current state (2026-11-21): read this first
+## Current state (2026-11-22): read this first
 
 Detailed dated entries follow below; this is the snapshot.
 
@@ -64,6 +64,8 @@ Detailed dated entries follow below; this is the snapshot.
 - **Taxonomy.** Four factors on 106K papers (`factors_v3`), read as Selection / Variation / Retention /
   Embeddedness. Report: `docs/reports/2026-11-21_creativity_taxonomy_bvsr/`.
 - **Prescience and emergence** (`build_prescience`). Reproduces Lockhart et al. Fig. S3.
+- **Fixer labelling with Claude subagents** (`fixer_candidates` + 16 in-session subagents, no API). Precision 0.80,
+  recall 0.92 against 85 hand labels. Report: `docs/reports/2026-11-22_fixer_impact/`.
 
 **Doesn't work / negative results**
 - Atom-based analogy score.
@@ -72,14 +74,25 @@ Detailed dated entries follow below; this is the snapshot.
 - Citation typing beyond "critique".
 - Messenger flag.
 - Critics are not more disruptive or more cited than matched non-critics.
+- **Fixers are not more cited either** (`fixer_impact_v2`): −1.0 [−3.1, +1.0] percentile points vs same-foundation
+  citers; +0.3 [−3.3, +3.9] vs papers stating the same limitation. A limitation's share of critics predicts how many
+  fixes it attracts (rho 0.35–0.41) but not their citations (raw, log, percentile, max, top-10%: all |rho| <= 0.10,
+  78 limitations). That test can only detect rho >= 0.31; scaling to ~950 critique groups would reach 0.09.
+- **Retrospective idea-generation benchmark: no-go** (user, 2026-11-22). LLM generators have read the post-T fixes
+  (contamination). Alien Space of Science avoids this by validating a non-LLM generator temporally and judging LLM
+  ideas only prospectively; the `ideagen` scaffold is kept for that kind of use.
 
 **Waiting on**
 - Luo & Evans gap-closing labels (Jerry).
 - Approval for an LLM verification pass on critique attributions.
 
 **Next**
-- **Idea generation.** Retrospective benchmark: briefing cards at a cutoff year, generation operators (analogy,
-  blending, axiom revision), single vs multi-agent, scored against the fixes that later appeared.
+- **Fixer scale-up (proposed, awaiting go-ahead):** ~950 pipeline critique groups x top 10 candidates (~9,500
+  subagent judgments), share of critics = group size / critics, analysis pre-specified at p < 0.001.
+- **Report update (offered):** switch outcomes to raw/log citations and percentile; replace Section 4 with the
+  per-limitation null + effort finding.
+- **Idea generation.** Atom-space generator validated by temporal recovery of post-T fixes (Alien Space style,
+  contamination-free); LLM / multi-agent generation judged prospectively on 2024–25 limitations.
 - **Taxonomy follow-ups.** Predicted emergence, citation-based novelty at publication, oblique rotation, 2020 +
   3-year-window sensitivity.
 
@@ -687,3 +700,69 @@ top-quartile on selection, 9/11 on retention, but 5/11 are in the bottom third o
 R-CNN, GCN, ResNet); the Transformer (no Fang record, so outside the factor sample) is 4th percentile on new
 concept pairs and 95th on prescience. Figures stay in the track figures folder (not a report figures/ folder) per
 Sam's one-folder rule; data/ is gitignored, so they must be copied if the report is shared through git.
+
+## 2026-11-21: idea-generation benchmark scaffold (`ideagen_build_v1`)
+
+Retrospective benchmark: can a generator, seeing only the literature up to a cutoff year T, propose what actually
+fixed a foundation's identified limitation? `bash scripts/shaky_foundations/ideagen_build.sh` (no API calls).
+- **Targets** (`configs/shaky_foundations/ideagen_targets.yaml`), 8: Transformer quadratic cost (T = 2019), VGG
+  depth (2015), BatchNorm small batch (2017), GCN over-smoothing (2019), seq2seq bottleneck (2014), static
+  embeddings / GloVe (2017), GAN instability (2016), VAE blurriness (2016). Fixes after T: 38 well-known papers
+  (all in Lacuna with atoms) + hand-judged critic-solvers for the Transformer and VGG.
+- **Briefing card as of T** (`cards.json`): foundation mechanism atoms, the limitation with the closest pre-T
+  critiques, and the closest pre-T attempts (known fixes by T + citers' mechanisms nearest the limitation).
+- **Scoring** (`ideagen.py`): an idea is embedded and compared with candidate papers after T (true fixes + 60
+  hard negatives that raise the same limitation without fixing it + ~250 random post-T citers), after projecting
+  the limitation's own embedding direction out of both. Main score: AUC of fixes vs non-fixes (chance 0.5).
+- **Controls validate it before any LLM call** (`controls.csv`): reference idea (the true fix in plain words,
+  written by Claude) AUC 0.92 (0.79–0.99), limitation restated 0.61 (0.33–0.89), random mechanisms 0.47.
+  Without the hard negatives and the direction removal, restating the limitation scored as well as the true fix.
+  The restated limitation is the baseline generated ideas must beat.
+- **Next:** generation (Claude-only pilot: baseline / analogy-seeded / insider-outsider multi-agent). Blocked on
+  an API route: `.env` has an OpenRouter key but no Anthropic key.
+
+## 2026-11-22: do papers that fix a foundation's limitation become more impactful? (`fixer_candidates_v1`, `fixer_impact_v1`)
+
+Alejandro's question. Critics were already shown not to be special (above); this tests *fixers*.
+- **Candidates** (`bash scripts/shaky_foundations/fixer_candidates.sh`): 54 gold foundations, 82 gold limitations. Every
+  citer up to 2022 is ranked by max cosine between the limitation and its problems_and_motivation problem/limitation
+  atoms (centroid proxy shortlist of 3,000 atoms, re-scored with real bge-large vectors; no attribution required,
+  so ResNet/Linformer-type fixes are reachable). Top 30 per limitation + 69 extra hand-labelled items = 2,529.
+- **Labels:** 16 Claude subagents (in-session, no API), one batch of ~159 each, prompt in `judge_prompt.md`:
+  fix 1,414 / mentions 498 / unrelated 546 / applies_fix 71. Agreement with my hand labels (85 Transformer/VGG
+  critics, judge blind to which): **precision 0.80, recall 0.92**. Several agents shared a scratchpad script name and
+  briefly read the wrong batch; each caught it (cand_id check) and relabelled; 30 sampled reasons match titles.
+- **Impact** (`bash scripts/shaky_foundations/fixer_impact.sh`; within-year citation percentiles; 1,336 fixer papers):
+
+| comparison | total citations | Lacuna citations |
+|---|---|---|
+| fixers minus same-foundation, same-year citers | −1.0 [−2.9, 0.8] | −0.6 [−2.7, 1.4] |
+| fix vs mentions (foundation + year FE, log refs) | +0.3 [−3.3, 3.8] | +1.4 [−2.1, 5.0] |
+| top-1% share: fix / mentions / unrelated | 5.2% / 8.0% / 6.0% | |
+| fixer premium, shakier minus less shaky foundations (median conc split, 32 foundations) | +5.0 [−0.0, 10.9] | |
+
+**Fixing a known limitation does not, on average, buy citations**: fixers look like any other paper citing the
+same foundation, and like papers that state the same limitation without fixing it (surveys and benchmarks among
+those even have more top-1% hits). **Hint of a dose effect:** fixes of shakier foundations (more concentrated
+critiques) do ~5 points better than fixes of less shaky ones (borderline CI; Spearman 0.39 across foundation means),
+which is the version of the claim worth testing properly. Caveats: "fix" includes partial and domain-specific
+fixes (56% of candidates), so famous frame-changing fixes are a handful among 1,336; candidates are the top 30 by
+problem similarity, not all fixers; the limitation is defined with hindsight (no cutoff T yet); conc_all exists for
+32 of 54 foundations.
+
+**Shakiness without rarefaction (2026-11-22, scratch check, not yet in a script).** Repeat probability = chance two
+distinct random critics share a c2000 concept, sum m_k(m_k-1) / (N(N-1)) (Simpson's index, unbiased at any N).
+Spearman 0.98 with rarefied conc_all where both exist; no dependence on critic count (rho with log N: 0.07 at
+N >= 5); covers 458/500 foundations at N >= 5 vs 190 at N >= 20. Raw top share is also only weakly N-biased
+(rho -0.11). Dose analysis with it: N >= 5, 51 gold foundations, shakier-minus-less-shaky fixer premium +4.1
+[0.7, 7.9], Spearman 0.27 [0.01, 0.49]; N >= 20: +3.5 [-1.8, 9.4]. Same direction, CI now excludes 0, still modest.
+- **v2 + report (2026-11-22):** agreement-based dose analysis moved into `fixer_impact.py` (`fixer_impact_v2`, with
+  permutation p-values, figures, random examples). Main dose result: ρ 0.27, permutation p = 0.056 (51
+  foundations); terciles −5.1 / +1.6 / −0.2 (a step at the scattered end, not a slope). Report:
+  `docs/reports/2026-11-22_fixer_impact/report.md` (+ .html).
+- **Line-level shakiness (2026-11-22, scratch, user's suggestion):** shakiness of the limitation a fixer addresses =
+  share of the foundation's attributed critics with a critique atom within cosine tau of that limitation (bge-large;
+  tau 0.75 / 0.78 (gold calibration) / 0.80). Sensible tops (Transformer quadratic 0.67, GCN over-smoothing 0.57).
+  **No relation to fixer premium:** 78 limitations with >= 5 critics, rho 0.04 [-0.17, 0.23], permutation p 0.71
+  (tau 0.78: 0.08, p 0.48); terciles -2.3 / +0.4 / -1.1. The foundation-level hint (Section 4 of the report) does
+  not survive measuring the right quantity; it likely reflected foundation type (crowded general-purpose tools).

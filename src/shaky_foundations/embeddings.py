@@ -72,3 +72,16 @@ def load_vectors(cache_dir: str, atom_ids: list[str]) -> tuple[dict[str, int], n
     if len(index) != len(want):
         raise ValueError(f"FATAL: {len(want) - len(index)} requested atoms are not in the cache {cache_dir}")
     return index, (np.concatenate(mats) if mats else np.empty((0, 1024), dtype=np.float16))
+
+
+_MODELS: dict = {}
+
+
+def embed_texts(texts: list[str], model_name: str, device: str, batch_size: int = 32) -> np.ndarray:
+    """Embed free text (ideas, limitation statements) in the same space as the atoms; unit-normalised float32.
+    The model is loaded once per process."""
+    if model_name not in _MODELS:
+        from sentence_transformers import SentenceTransformer
+        _MODELS[model_name] = SentenceTransformer(model_name, device=device)
+    return _MODELS[model_name].encode(texts, batch_size=batch_size, normalize_embeddings=True,
+                                      show_progress_bar=False).astype(np.float32)

@@ -1,0 +1,26 @@
+output_dir: data/shaky_foundations/fixer_candidates_v1
+
+lacuna_dir: data/lacuna-recombination-2026-11-06-v2
+lacuna_package: lacuna-recombination-2026-11-06-v2
+gold_path: configs/shaky_foundations/gold_limitations.yaml
+scored_path: data/shaky_foundations/scale_foundations_v2/foundations_scored.csv
+
+citer_year_max: 2022            # leaves >= 3 years of citations before the 2025 counts
+top_k: 30                       # citers per gold limitation sent to the judge (closest stated problem)
+problem_types: [problem, limitation]
+problem_lens: problems_and_motivation   # what the paper says it sets out to solve
+shortlist_atoms: 3000            # best atoms by centroid proxy, re-scored with real bge-large vectors
+n_batches: 16                   # one Claude subagent per batch (~160 items, ~40K tokens)
+
+# Hand-judged critics (2026-11-21) on lines that correspond to a gold limitation; scored against the judge.
+validation:
+  critics_path: data/shaky_foundations/limitation_timelines_camera_v1/critics.csv
+  camera_config: configs/shaky_foundations/limitation_timelines_camera.yaml
+  line_map:
+    - {short: Transformer, label: "quadratic cost", lim_idx: 0}
+    - {short: VGG, label: "vanishing gradients", lim_idx: 0}
+    - {short: VGG, label: "parameter redundancy", lim_idx: 1}
+    - {short: VGG, label: "edge-deployment cost", lim_idx: 1}
+
+seed: 0
+embedding: {model: BAAI/bge-large-en-v1.5, device: mps, cache_dir: data/shaky_foundations/atom_vectors}

@@ -1,0 +1,92 @@
+# Retrospective idea-generation benchmark: targets.
+#
+# Each target = a foundation + the limitation identified for it + a cutoff year T. The generator sees only
+# literature up to and including T (briefing card); ideas are scored against the fixes that actually appeared
+# after T (ground truth). T is chosen so the limitation was already raised by T and the main fixes came later.
+#
+# fixes_after:   well-known fix papers published after T (exact Lacuna titles; checked present with atoms)
+# tried_by_T:    fix attempts already published by T (shown to the generator as prior work)
+# solver_pids:   extra ground-truth fixes = critics hand-judged as proposing a fix (limitation_timelines_camera.yaml);
+#                only those published after T are used
+# reference_idea: Claude's plain-language description of the fix that actually happened (2026-11-21). A scoring
+#                control only, never shown to the generator: the scorer must rank the true fixes first for it.
+#
+# Caveat: generators trained on later literature know these fixes. Scores measure reaching a known fix, not
+# discovery; the anonymised card and the controls bound, but do not remove, that contamination.
+
+targets:
+  - id: transformer_quadratic
+    foundation: "Attention is All you Need"
+    limitation: "self-attention has quadratic time and memory cost in sequence length, so long sequences are prohibitively expensive"
+    cutoff_year: 2019
+    tried_by_T: ["Generating Long Sequences with Sparse Transformers"]
+    fixes_after: ["Reformer: The Efficient Transformer", "Linformer: Self-Attention with Linear Complexity",
+                  "Longformer: The Long-Document Transformer", "Rethinking Attention with Performers",
+                  "Big Bird: Transformers for Longer Sequences",
+                  "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention"]
+    solvers_from: {config: configs/shaky_foundations/limitation_timelines_camera.yaml, foundation: Transformer, limitation: "quadratic cost"}
+    reference_idea: "Approximate full self-attention so its cost grows linearly with sequence length: project keys and values to a fixed low dimension, use kernel feature maps instead of the softmax, or restrict each token to a local window plus a few global tokens."
+
+  - id: vgg_depth
+    foundation: "Very Deep Convolutional Networks for Large-Scale Image Recognition"
+    limitation: "very deep plain networks are hard to optimize: gradients vanish and accuracy degrades as layers are added"
+    cutoff_year: 2015
+    tried_by_T: ["Highway Networks", "Training Very Deep Networks"]
+    fixes_after: ["Deep Residual Learning for Image Recognition", "Identity Mappings in Deep Residual Networks",
+                  "Densely Connected Convolutional Networks"]
+    solvers_from: {config: configs/shaky_foundations/limitation_timelines_camera.yaml, foundation: VGG, limitation: "vanishing gradients"}
+    reference_idea: "Add identity shortcut connections so each block learns a residual on top of its input, letting gradients flow directly through very deep stacks; or connect every layer to all later layers."
+
+  - id: batchnorm_small_batch
+    foundation: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift"
+    limitation: "batch statistics become noisy and unreliable with small mini-batch sizes"
+    cutoff_year: 2017
+    tried_by_T: ["Batch Renormalization: Towards Reducing Minibatch Dependence in Batch-Normalized Models", "Layer Normalization"]
+    fixes_after: ["Group Normalization", "Weight Standardization",
+                  "Filter Response Normalization Layer: Eliminating Batch Dependence in the Training of Deep Neural Networks"]
+    reference_idea: "Normalize using statistics computed within each example instead of across the batch, for example over groups of channels, or normalize the weights rather than the activations, so training no longer depends on batch size."
+
+  - id: gcn_oversmoothing
+    foundation: "Semi-Supervised Classification with Graph Convolutional Networks"
+    limitation: "stacking many graph convolution layers causes over-smoothing, so node representations become indistinguishable"
+    cutoff_year: 2019
+    tried_by_T: ["Predict then Propagate: Graph Neural Networks meet Personalized PageRank"]
+    fixes_after: ["Simple and Deep Graph Convolutional Networks", "DropEdge: Towards Deep Graph Convolutional Networks on Node Classification",
+                  "PairNorm: Tackling Oversmoothing in GNNs", "DeeperGCN: All You Need to Train Deeper GCNs"]
+    reference_idea: "Keep node features distinct in deep graph networks with initial-residual connections back to the input features, randomly dropping edges during training, or a normalization that keeps the total pairwise distance between node embeddings constant."
+
+  - id: seq2seq_bottleneck
+    foundation: "Sequence to Sequence Learning with Neural Networks"
+    limitation: "compressing the whole input sequence into a single fixed-length vector is a bottleneck for long sentences"
+    cutoff_year: 2014
+    tried_by_T: []
+    fixes_after: ["Neural Machine Translation by Jointly Learning to Align and Translate",
+                  "Effective Approaches to Attention-based Neural Machine Translation", "Attention is All you Need"]
+    reference_idea: "Let the decoder attend to all encoder hidden states at every step, computing a learned weighted average (soft alignment) instead of relying on one fixed-length summary vector."
+
+  - id: static_embeddings
+    foundation: "GloVe: Global Vectors for Word Representation"
+    limitation: "static word embeddings assign one context-independent vector per word and cannot handle polysemy"
+    cutoff_year: 2017
+    tried_by_T: ["Learned in Translation: Contextualized Word Vectors"]
+    fixes_after: ["Deep Contextualized Word Representations", "Universal Language Model Fine-tuning for Text Classification",
+                  "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"]
+    reference_idea: "Represent each word by the hidden states of a deep language model pretrained on large text, so a word's vector depends on its sentence context, then fine-tune that pretrained model on downstream tasks."
+
+  - id: gan_instability
+    foundation: "Generative Adversarial Nets"
+    limitation: "adversarial training is unstable, with vanishing generator gradients and mode collapse"
+    cutoff_year: 2016
+    tried_by_T: []
+    fixes_after: ["Wasserstein GAN", "Improved Training of Wasserstein GANs",
+                  "Least Squares Generative Adversarial Networks", "Spectral Normalization for Generative Adversarial Networks"]
+    reference_idea: "Replace the discriminator's classification loss with an estimate of the Wasserstein (earth mover's) distance, keeping the critic Lipschitz through weight clipping, a gradient penalty, or spectral normalization of its weights, so the generator always receives useful gradients."
+
+  - id: vae_blurry
+    foundation: "Auto-Encoding Variational Bayes"
+    limitation: "variational autoencoders produce blurry samples and lose high-frequency detail"
+    cutoff_year: 2016
+    tried_by_T: ["Improved Variational Inference with Inverse Autoregressive Flow"]
+    fixes_after: ["Neural Discrete Representation Learning", "PixelVAE: A Latent Variable Model for Natural Images",
+                  "Generating Diverse High-Fidelity Images with VQ-VAE-2", "NVAE: A Deep Hierarchical Variational Autoencoder"]
+    reference_idea: "Use a discrete latent codebook learned by vector quantization with a powerful autoregressive prior, or an autoregressive decoder, or a deep hierarchy of latent variables, so the model captures fine detail instead of averaging it out."

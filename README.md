@@ -23,4 +23,5 @@ bash scripts/shaky_foundations/build_prescience.sh     # prescience and emergenc
 bash scripts/shaky_foundations/analyze_factors_v3.sh   # factor structure of the metrics
 bash scripts/shaky_foundations/pilot_critiques.sh      # attribute critiques to foundations (pilot)
 bash scripts/shaky_foundations/evaluate_gold.sh        # score limitation identification on the gold set
+bash scripts/shaky_foundations/fixer_impact.sh         # are fixes of foundation limitations more cited?
 ```

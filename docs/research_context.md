@@ -24,7 +24,7 @@ Science, Griffiths lab, UvA CreAILab, Penn State, Knowledge Lab) has two objecti
 | sci_twist | prototype (2026-07-18) | retrieval-resistant synthetic environments with forced-artifact grading |
 | **shaky_foundations** | **active** | taxonomy of creativity metrics on 2M AI papers; finding foundations' limitations; next, idea generation |
 
-## Key findings so far (shaky_foundations, 2026-11-21)
+## Key findings so far (shaky_foundations, 2026-11-22)
 
 - **Four independent dimensions of creativity metrics** in 106K AI papers (2010–19): Variation (combinatorial
   novelty at publication), Selection (later uptake: prescience, emergence, adoption), Retention (built upon vs
@@ -34,8 +34,14 @@ Science, Griffiths lab, UvA CreAILab, Penn State, Knowledge Lab) has two objecti
 - **Limitations of foundational papers can be identified from Lacuna's idea atoms.** The recurring critique group
   recovers the known limitation for about 2 in 3 well-criticised foundations, although individual critique
   attributions are only ~25% precise. This localises where idea generation should aim.
+- **Fixing a known limitation does not earn citations.** 1,336 papers proposing fixes for 82 limitations of 54
+  foundations (labelled by Claude subagents, precision 0.80) are no more cited than other papers citing the same
+  foundation. Limitations that dominate a foundation's critiques attract more fixes, but not better-cited ones.
+  Report: `docs/reports/2026-11-22_fixer_impact/`.
 
 ## Where we are
 
-Taxonomy: written up; waiting on gap-closing data. Limitation identification: validated. Next: building the
-idea-generation step, a retrospective benchmark scored against the fixes that actually appeared.
+Taxonomy: written up; waiting on gap-closing data. Limitation identification: validated. Fix impact: null result,
+scale-up proposed for power. Idea generation: scoring LLM ideas against known later fixes is ruled out by
+contamination; next is an Alien-Space-style design (atom-space generator validated temporally, LLM ideas judged
+prospectively on current limitations).
